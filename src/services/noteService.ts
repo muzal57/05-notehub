@@ -18,8 +18,6 @@ export interface FetchNotesParams {
 export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
-  currentPage: number;
-  totalNotes: number;
 }
 
 export interface CreateNoteData {

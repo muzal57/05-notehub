@@ -1,17 +1,9 @@
 import { useState } from "react";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  keepPreviousData,
-} from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 
 import {
   fetchNotes,
-  deleteNote,
-  createNote,
-  type CreateNoteData,
   type FetchNotesResponse,
 } from "../../services/noteService";
 import NoteList from "../NoteList/NoteList";
@@ -27,8 +19,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const queryClient = useQueryClient();
-
   const { data, isLoading, isError, error } = useQuery<
     FetchNotesResponse,
     Error
@@ -37,21 +27,6 @@ function App() {
     queryFn: () =>
       fetchNotes({ page: currentPage, perPage: 12, search: searchQuery }),
     placeholderData: keepPreviousData,
-  });
-
-  const createNoteMutation = useMutation({
-    mutationFn: (newNote: CreateNoteData) => createNote(newNote),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
-      closeModal();
-    },
-  });
-
-  const deleteNoteMutation = useMutation({
-    mutationFn: (noteId: string) => deleteNote(noteId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
-    },
   });
 
   const handlePageClick = (selectedItem: { selected: number }) => {
@@ -97,17 +72,11 @@ function App() {
         </div>
       )}
 
-      {notes.length > 0 && (
-        <NoteList notes={notes} onDelete={deleteNoteMutation.mutate} />
-      )}
+      {notes.length > 0 && <NoteList notes={notes} />}
 
       {isModalOpen && (
         <Modal onClose={closeModal}>
-          <NoteForm
-            onSubmit={createNoteMutation.mutate}
-            onCancel={closeModal}
-            isLoading={createNoteMutation.isPending}
-          />
+          <NoteForm onCancel={closeModal} />
         </Modal>
       )}
     </div>
