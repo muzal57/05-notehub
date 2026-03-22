@@ -13,12 +13,12 @@ import {
   createNote,
   type CreateNoteData,
   type FetchNotesResponse,
-} from "../services/noteService";
-import NoteList from "./NoteList";
-import Modal from "./Modal";
-import NoteForm from "./NoteForm";
-import Pagination from "./Pagination";
-import SearchBox from "./SearchBox";
+} from "../../services/noteService";
+import NoteList from "../NoteList/NoteList";
+import Modal from "../Modal/Modal";
+import NoteForm from "../NoteForm/NoteForm";
+import Pagination from "../Pagination/Pagination";
+import SearchBox from "../SearchBox/SearchBox";
 
 import css from "./App.module.css";
 
