@@ -13,7 +13,7 @@ import {
   createNote,
   type CreateNoteData,
   type FetchNotesResponse,
-} from "../types/noteService";
+} from "../services/noteService";
 import NoteList from "./NoteList";
 import Modal from "./Modal";
 import NoteForm from "./NoteForm";
