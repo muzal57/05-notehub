@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { type CreateNoteData } from "./noteService";
-import { type NoteTag } from "./note";
+import { type CreateNoteData } from "../types/noteService";
+import { type NoteTag } from "../types/note";
 import css from "./NoteForm.module.css";
 
 interface NoteFormProps {
